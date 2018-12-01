@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-
+import ConvertedOutput from './ConvertedOutput';
 
 class SearchBar extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             kg: 0,
             lbs: 0,
@@ -13,7 +13,8 @@ class SearchBar extends Component {
             fahrenheit: 0,
             kelvin: 0,
             value: 'kgtolbs',
-            userInput: ''
+            userInput: '',
+            userOutput: ''
         }
 
         this.convertKgToLbs.bind(this);
@@ -73,7 +74,8 @@ class SearchBar extends Component {
         const kg = this.state.userInput;
         const lbsConversion = kg * 2.205;
         this.setState({
-          lbs: lbsConversion.toFixed(1)
+          lbs: lbsConversion.toFixed(1),
+          userOutput: lbsConversion.toFixed(1)
         });
     }
 
@@ -81,7 +83,8 @@ class SearchBar extends Component {
         const lb = this.state.userInput;
         const kgConversion = lb * 0.45;
         this.setState({
-            kg: kgConversion.toFixed(1)
+            kg: kgConversion.toFixed(1),
+            userOutput: kgConversion.toFixed(1)
         });
     }
 
@@ -89,7 +92,8 @@ class SearchBar extends Component {
         const gram = this.state.userInput;
         const ozConversion = gram * 0.035274;
         this.setState({
-            ounces: ozConversion.toFixed(2)
+            ounces: ozConversion.toFixed(2),
+            userOutput: ozConversion.toFixed(2)
         });
     }
 
@@ -97,7 +101,8 @@ class SearchBar extends Component {
         const ounce = this.state.userInput;
         const gramConversion = ounce * 28.3495;
         this.setState({
-            grams: gramConversion.toFixed(2)
+            grams: gramConversion.toFixed(2),
+            userOutput: gramConversion.toFixed(2)
         });
     }
 
@@ -105,7 +110,8 @@ class SearchBar extends Component {
         const celsius = this.state.userInput;
         const fahrenheitConversion = celsius * 9 / 5 + 32;
         this.setState({
-            fahrenheit: fahrenheitConversion.toFixed(2)
+            fahrenheit: fahrenheitConversion.toFixed(2),
+            userOutput: fahrenheitConversion.toFixed(2)
         });
     }
 
@@ -113,7 +119,8 @@ class SearchBar extends Component {
         const fahrenheit = this.state.userInput;
         const celsiusConversion = ( fahrenheit - 32 ) * 5 / 9;
         this.setState({
-            celsius: celsiusConversion.toFixed(2)
+            celsius: celsiusConversion.toFixed(2),
+            userOutput: celsiusConversion.toFixed(2)
         });
     }
 
@@ -121,37 +128,13 @@ class SearchBar extends Component {
         const celsius = parseInt(this.state.userInput);
         const kelvinConversion = celsius + 273.15;
         this.setState({
-            kelvin: kelvinConversion.toFixed(2)
+            kelvin: kelvinConversion.toFixed(2),
+            userOutput: kelvinConversion.toFixed(2)
         });
     }
 
     render(
     ){
-    
-        var unitOutput;
-        switch(this.state.value){
-            case 'kgtolbs':
-                unitOutput = `${this.state.lbs} lbs`;
-                break;
-            case 'lbstokg':
-                unitOutput = `${this.state.kg} kg`;
-                break;
-            case 'gramtoounce':
-                unitOutput =  `${this.state.ounces} oz`;
-                break;
-            case 'ouncetogram':
-                unitOutput =  `${this.state.grams} g`;
-                break;
-            case 'celsiustofahrenheit':
-                unitOutput = `${this.state.fahrenheit} F`;
-                break;
-            case 'fahrenheittocelsius':
-                unitOutput = `${this.state.celsius} C`;
-                break;
-            case 'celsiustokelvin':
-                unitOutput = `${this.state.kelvin} K`;
-                break;
-        }
 
         return(
         
@@ -167,7 +150,10 @@ class SearchBar extends Component {
                     <option value="celsiustokelvin">Celsius to Kelvin</option>
 
                 </select>
-                <p className="unitoutput">{unitOutput}</p>
+                <ConvertedOutput 
+                    unit={this.state.value}
+                    output={this.state.userOutput}
+                    />
             </div>
       
         );
