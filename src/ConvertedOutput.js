@@ -5,40 +5,41 @@ import PropTypes from 'prop-types';
 const ConvertedOutput = (props) => {
     const { output } = props;
 
-    var unitOutput;
+    var unit;
         switch(props.unit){
         case 'kgtolbs':
-            unitOutput = `${output} lbs`;
+            unit = 'lbs';
             break;
         case 'lbstokg':
-            unitOutput = `${output} kg`;
+            unit = 'kg';
             break;
         case 'gramtoounce':
-            unitOutput =  `${output} oz`;
+            unit =  'oz';
             break;
         case 'ouncetogram':
-            unitOutput =  `${output} g`;
+            unit =  'g';
             break;
         case 'celsiustofahrenheit':
-            unitOutput = `${output} F`;
+            unit = 'F';
             break;
         case 'fahrenheittocelsius':
-            unitOutput = `${output} C`;
+            unit = 'C';
             break;
         case 'celsiustokelvin':
-            unitOutput = `${output} K`;
+            unit = 'K';
             break;
         }
     
     return(
             <div>
-                <p>{unitOutput}</p>
+                <p>{output} {unit}</p>
             </div>
         );
 }
 
 ConvertedOutput.proptypes = {
-    output: PropTypes.number.isRequired
+    output: PropTypes.number.isRequired,
+    unit: PropTypes.string.isRequired
 }
 
 
